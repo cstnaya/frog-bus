@@ -1,11 +1,22 @@
 import React from "react";
-import Header from "../components/Header";
 
 const Home = () => {
     return (
         <>
-            <Header />
-            Home page here.
+            <h1>
+                Logo
+            </h1>
+            <ul>
+                <li>    
+                    <a href={`${process.env.PUBLIC_URL}/#/routes`}>routes </a>
+                </li>
+                <li>
+                    <a href={`${process.env.PUBLIC_URL}/#/stops`}>stops </a>
+                </li>
+                <li>
+                    <a href={`${process.env.PUBLIC_URL}/#/nearby`}>nearby </a>
+                </li>
+            </ul>
         </>
     );
 };
