@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/frog-bus/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/frog-bus/static/js/main.f9528690.chunk.js",
+    "main.js.map": "/frog-bus/static/js/main.f9528690.chunk.js.map",
+    "runtime-main.js": "/frog-bus/static/js/runtime-main.002f9e6d.js",
+    "runtime-main.js.map": "/frog-bus/static/js/runtime-main.002f9e6d.js.map",
+    "static/js/2.d2534a27.chunk.js": "/frog-bus/static/js/2.d2534a27.chunk.js",
+    "static/js/2.d2534a27.chunk.js.map": "/frog-bus/static/js/2.d2534a27.chunk.js.map",
+    "static/js/3.5ea9f60f.chunk.js": "/frog-bus/static/js/3.5ea9f60f.chunk.js",
+    "static/js/3.5ea9f60f.chunk.js.map": "/frog-bus/static/js/3.5ea9f60f.chunk.js.map",
+    "index.html": "/frog-bus/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/frog-bus/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.d2534a27.chunk.js.LICENSE.txt": "/frog-bus/static/js/2.d2534a27.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/frog-bus/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.002f9e6d.js",
+    "static/js/2.d2534a27.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.f9528690.chunk.js"
+  ]
+}
