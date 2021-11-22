@@ -1,8 +1,12 @@
 import React from "react";
+import Header from "../components/Header";
 
 const Home = () => {
     return (
-        <>Home page here.</>
+        <>
+            <Header />
+            Home page here.
+        </>
     );
 };
 

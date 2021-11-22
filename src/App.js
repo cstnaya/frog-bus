@@ -5,9 +5,12 @@ import Test from "./pages/Test";
 
 const App = () => {
     return (
-        <HashRouter basename={process.env.PUBLIC_URL}>
+        <HashRouter>
             <Switch>
-                <Route path="/second-test" component={Test} />
+                <Route path="/routes" component={Test} />
+                <Route path="/stops"  component={Test} />
+                <Route path="/nearby" component={Test} />
+                <Route path="/routes" component={Test} />
                 <Route exact path="/" component={Home} />
             </Switch>
         </HashRouter>
