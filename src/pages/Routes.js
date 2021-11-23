@@ -1,33 +1,47 @@
 import React from "react";
 import Header from "../components/Header";
-import Search from "../components/Search";
+import SearchRoute from "../components/SearchRoute";
 import { searchHolders } from "../widgets/widgets";
+import api from "../apis/api";
 
 const Routes = () => {
 
-    const fetchResults = (city, keyword) => {
-        // api
-        console.log(city, keyword);
+    const fetchResults = async (City, RouteID) => {
+        console.log(City, RouteID);
 
-        const results = [{id: 0, name: 'test'}];
+        const query = `EstimatedTimeOfArrival/Streaming/City/${City}?$filter=RouteID eq '${RouteID}'&$orderby=StopSequence&$top=200&$format=JSON`;
+        const results = await api.get(query);
 
         return results;
     };
 
-    const fetchBuses = (newTerm) => {
-        // api
+    const fetchBuses = async (City, RouteName) => {
+        const query = `StopOfRoute/City/${City}/${RouteName}?$format=JSON`;
+        const responses = await api.get(query);
+        
+        const s = new Set(responses.data.map(item => 
+                            (JSON.stringify({RouteID: item.RouteID, RouteName: item.RouteName.Zh_tw}))
+                        ));
+        const fs = [...s].map(item => JSON.parse(item))
 
-        const buses = [{id: 0, name: "225"}];
+        return fs;
+    };
 
-        return buses;
+    const handleSubmitToQuery = (form, RouteID) => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'hidden');
+        input.setAttribute('name', 'RouteID');
+        input.setAttribute('value', RouteID);
+        form.appendChild(input);
     };
 
     return (
         <>
             <Header />
-            <Search Placeholder={{ "select" : searchHolders.select, "input" : searchHolders.routes }} 
-                    handleFetchResult={fetchResults} 
-                    handleFetchList={fetchBuses} />
+            <SearchRoute Placeholder={{ "select" : searchHolders.select, "input" : searchHolders.routes }}
+                         handleFetchList={fetchBuses} 
+                         handleFetchResult={fetchResults} 
+                         handleSubmitToQuery={handleSubmitToQuery} />
         </>
     );
 };

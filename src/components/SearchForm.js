@@ -1,56 +1,70 @@
 import React, { useState, useCallback  } from "react";
 import { cities, debounce } from "../widgets/widgets";
 
-const SearchForm = ({ Placeholder, handleFetchList }) => {
+const SearchForm = ({ Placeholder, handleFetchList, handleSubmitToQuery }) => {
     const cities_options = Object.keys(cities).map((city) => 
                                 <option value={cities[city]} key={cities[city]}>{city}</option>);
 
+    const [City, setCity] = useState('');
     const [term, setTerm]   = useState('');
-    const [selected, setSelected] = useState('');
     const [buses, setBuses] = useState([]);
 
-    const fetchBus = (newTerm) => {
+    const fetchBus = async (City, newTerm) => {
         let newBuses = [];
 
         if (newTerm !== "" && newTerm !== null) {
-            newBuses = handleFetchList(newTerm);
+            newBuses = await handleFetchList(City, newTerm);
         }
 
         setBuses(newBuses);
     }
 
-    const debouncedFetchBus = useCallback(debounce(term => fetchBus(term)), []); 
+    const debouncedFetchBus = useCallback(debounce((City, term) => fetchBus(City, term)), []); 
 
     const processChange = e => {
         const newTerm = e.target.value;
         setTerm(newTerm);
-        debouncedFetchBus(newTerm);
+        debouncedFetchBus(City, newTerm);
     };
 
     const checkValInList = e => {
-        if (buses.filter(bus => bus.name === term).length > 0) {
+        if (buses.filter(bus => bus.RouteName === term).length > 0) {
             const form = document.querySelector('#form');
+
+            handleSubmitToQuery(form, '12345');
+            
             form.submit();
         }
         e.preventDefault();
     }
 
+    const handleSelectChange = (e) => {
+        setCity(e.target.value);
+        setTerm('');
+        setBuses([]);
+    }
+
     return (
         <form method="get" onSubmit={checkValInList} id='form'>
-            <select name='city'  value={selected} onChange={e => setSelected(e.target.value)} required>
+            <select value={City} 
+                    onChange={handleSelectChange} 
+                    required 
+            >
                 <option disabled value="">{Placeholder.select}</option>
-
                 { cities_options }
             </select>
             
-            <input  name="keyword" list='list-buses' 
-                    autoComplete="off" 
-                    required onChange={processChange} 
-                    placeholder={Placeholder.input} />
+            <input  list='list-buses' 
+                    autoComplete="off"
+                    placeholder={Placeholder.input}
+                    value={term}
+                    onChange={processChange} 
+                    hidden={!City} 
+                    required />
 
             <datalist id="list-buses">
-                {buses.map(function(bus) {
-                    return <option value={bus.name} key={bus.id} />
+                {buses.map(function(bus, index) {
+                    return <option value={bus.RouteName}  data-routeid={bus.RouteID} key={index} />
                 })}
             </datalist>
             

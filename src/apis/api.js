@@ -17,7 +17,7 @@ function GetAuthorizationHeader() {
 }
 
 export default axios.create({
-    baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Tourism/',
+    baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Bus/',
     timeout: 1000,
     headers: GetAuthorizationHeader()
 });
