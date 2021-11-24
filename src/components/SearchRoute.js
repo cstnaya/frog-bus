@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
-import SearchResult from "./SearchResult";
+import SearchRouteResult from "./SearchRouteResult";
 
-const SearchRoute = ({ Placeholder, handleFetchResult, handleFetchList, handleSubmitToQuery }) => {
+const SearchRoute = ({ Placeholder,
+                       handleFetchList,
+                       handleFetchResult,
+                       handleOptionLists,
+                       handleSubmitToQuery,
+                       handleCheckTermInBus
+                    }) => {
     const [City, setCity] = useState('');
     const [RouteID, setRouteID] = useState('');
-    const [result, setResult] = useState([]);
-    
+
+    const [result, setResult] = useState([[], []]);
+    const [destination, setDestination] = useState(["", ""]);
+
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
         const r = query.get('RouteID');
@@ -18,16 +26,20 @@ const SearchRoute = ({ Placeholder, handleFetchResult, handleFetchList, handleSu
     useEffect(() => {
         if (!City || !RouteID) { return ; }
 
-        const results = handleFetchResult(City, RouteID);
-        setResult(results);
+        handleFetchResult(City, RouteID).then(response => {
+            setResult(response.results);
+            setDestination(response.destination);
+        });
     }, [City, RouteID]);
 
     return (
         <>
             <SearchForm   Placeholder={Placeholder} 
                           handleFetchList={handleFetchList}
-                          handleSubmitToQuery={handleSubmitToQuery} />
-            <SearchResult results={result} />
+                          handleSubmitToQuery={handleSubmitToQuery} 
+                          handleOptionLists={handleOptionLists} 
+                          handleCheckTermInBus={handleCheckTermInBus} />
+            <SearchRouteResult results={result} destination={destination} />
         </>
     );
 };
