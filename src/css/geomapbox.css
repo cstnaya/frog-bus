@@ -1,0 +1,23 @@
+.marker {
+    background-image: url('/src/imgs/maker.svg');
+    background-size: cover;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.nowPosition {
+    background-image: url('/src/imgs/nowPos.svg');
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 500;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+    border-radius: 55px;
+}
+
+.mapboxgl-popup-content {}

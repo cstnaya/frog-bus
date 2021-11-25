@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect  } from "react";
+import React, { useState, useCallback } from "react";
 import { cities, debounce } from "../widgets/widgets";
 
 const SearchForm = ({ Placeholder, handleFetchList, handleOptionLists, handleSubmitToQuery, handleCheckTermInBus }) => {
@@ -71,7 +71,9 @@ const SearchForm = ({ Placeholder, handleFetchList, handleOptionLists, handleSub
                 { handleOptionLists(buses) }
             </datalist>
             
-            <button type="submit">submit</button>
+            <button type="submit">
+                <i className="fa fa-search" aria-hidden="true"></i>
+            </button>
         </form>
     );
 };

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import SearchNoResult from "./SearchNoResult";
 
 const SearchRouteResult = ({ results, destination }) => {
     const [nowDirection, setDirection] = useState(0);
-    
+    const query = new URLSearchParams(window.location.search).get('City');
+
     return (
         <section>
             { results[0].length > 0 && <button onClick={e => setDirection(0)}>往 {destination[0]}</button> }
@@ -15,6 +17,8 @@ const SearchRouteResult = ({ results, destination }) => {
                     })
                 }
             </ol>
+
+            { query && results[0].length === 0 && results[1].length === 0 ? <SearchNoResult /> : null }
         </section>
     );
 };

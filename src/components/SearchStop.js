@@ -23,10 +23,14 @@ const SearchStop = ({ Placeholder, handleFetchList, handleOptionLists, handleChe
 
         handleFetchResult(City, StationID).then(res => {
             const datas = res.data;
-            const buses = datas.map(data => ({ RouteName: data.RouteName.Zh_tw, 
-                                               EstimateTime: data.EstimateTime ? `還有 ${getEstimateTime(data.EstimateTime, data.SrcTransTime)} 分鐘進站` : '尚未發車' }) );
-        
-            SetResult(buses);
+            
+            if (datas.length > 0) {
+                const buses = datas.map(data => ({ RouteName: data.RouteName.Zh_tw, 
+                                                   EstimateTime: data.EstimateTime ? `還有 ${getEstimateTime(data.EstimateTime, data.SrcTransTime)} 分鐘進站` : '尚未發車' }) );
+                SetResult(buses);
+            }  else {
+                SetResult([]);
+            }
         });
     }, [City, StationID]);
 

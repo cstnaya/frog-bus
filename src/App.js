@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Routes from "./pages/Routes";
 import Stops from "./pages/Stops";
 import NearBy from "./pages/NearBy";
+import 'font-awesome/css/font-awesome.min.css';
 
 const App = () => {
     return (

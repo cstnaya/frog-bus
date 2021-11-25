@@ -10,11 +10,12 @@ const Routes = () => {
         let results = [[], []];
         let destination = ["", ""];
         
-        // N1: City should be in N1Cities array. 
+        // N1: {City} should be in N1Cities array. 
         if (N1Cities.indexOf(City) > -1) {
             const query = `EstimatedTimeOfArrival/Streaming/City/${City}?$filter=RouteID eq '${RouteID}'&$orderby=StopSequence&$top=200&$format=JSON`;
             results = await api.get(query);
 
+            // N1 data will return duplicated datas, so we need to remove them.
             const removeDuplicate = function(arr) {
                 arr.forEach((item, idx) => {
                     const next = arr[ (idx+1) % arr.length ];
@@ -25,6 +26,7 @@ const Routes = () => {
                 return arr;
             };
 
+            // subtract time error when transferring data.
             const getPreciseTime = function(arr) {
                 return arr.map(item => {    
                     return ({ ...item, EstimateTime: getEstimateTime(item.EstimateTime, item.SrcTransTime) });

@@ -2,8 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import api from "../apis/api";
 import SearchStop from "../components/SearchStop";
-import { searchHolders, Bearings } from "../widgets/widgets";
-import jsSHA from "jssha";
+import { searchHolders, Bearings, N1Cities } from "../widgets/widgets";
 
 const Stops = () => {
 
@@ -45,33 +44,38 @@ const Stops = () => {
     };
 
     const fetchResults = async (City, StationID) => {
-        // get stops:
-        const query = `Station/City/${City}?$filter=StationID eq '${StationID}'&$format=JSON`;
-        const responses = await api.get(query);
+        // N1: {City} should be in N1Cities array. 
+        if (N1Cities.indexOf(City) > -1) {
+            // get stops:
+            const query = `Station/City/${City}?$filter=StationID eq '${StationID}'&$format=JSON`;
+            const responses = await api.get(query);
 
-        const Stops = responses.data[0].Stops;
-        const s = new Set(Stops.map(item => {
-                    return JSON.stringify({ StopID: item.StopID, RouteID: item.RouteID });
-                }));
+            const Stops = responses.data[0].Stops;
+            const s = new Set(Stops.map(item => {
+                        return JSON.stringify({ StopID: item.StopID, RouteID: item.RouteID });
+                    }));
 
-        const stops = [...s].map(item => JSON.parse(item));
+            const stops = [...s].map(item => JSON.parse(item));
 
-        // get waiting time:
-        let qq = `EstimatedTimeOfArrival/City/${City}?$format=JSON`;
-        stops.forEach((stop, idx) => {
-            const rid = stop.RouteID;
-            const sid = stop.StopID;
-            
-            if (idx > 0) {
-                qq += `or (RouteID eq '${rid}' and StopID eq '${sid}') `;
-            }  else {
-                qq += `&$filter=(RouteID eq '${rid}' and StopID eq '${sid}') `;
-            }
-        });
+            // get waiting time:
+            let qq = `EstimatedTimeOfArrival/Streaming/City/${City}?$format=JSON`;
+            stops.forEach((stop, idx) => {
+                const rid = stop.RouteID;
+                const sid = stop.StopID;
+                
+                if (idx > 0) {
+                    qq += `or (RouteID eq '${rid}' and StopID eq '${sid}') `;
+                }  else {
+                    qq += `&$filter=(RouteID eq '${rid}' and StopID eq '${sid}') `;
+                }
+            });
 
-        const waiting = await api.get(qq);
+            const waiting = await api.get(qq);
 
-        return waiting;
+            return waiting;
+        }  else {
+            return { data: [] };
+        }
     };
 
     return (
