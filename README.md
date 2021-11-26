@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# Week3 - 全台公車動態時刻查詢應用服務 - 蛙蛙公車
+===
+###### tags: `React` `React-router-dom` `axios` `mapbox-gl` `jsSHA` `ESLint` `MOTC-TDX`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Project Description
+The F2E 第三周作品專案，公車即時動態搜尋 App。
+- [找路線]：輸入欲搜尋的公車路線，顯示該路線公車目前位置，及各站須等待時間。 (每 30 秒刷新一次)
+- [找站牌]：輸入使用者目前所在站牌，顯示行經此站牌的公車路線一覽，及各自的等待時間。(每 30 秒刷新一次)
+- [找附近車站]：鎖定使用者目前位置，顯示使用者周遭站牌及其位置。 (約 600 公尺內)
 
-In the project directory, you can run:
+### System Description
+運行方式：
+- `npm install`
+- `npm start`
 
-### `npm start`
+### Tools
+此專案使用到的工具:
+- React, React-dom, React-router-dom
+- axios
+- font-awesome js/css library
+- jsSHA
+- mapbox-gl-js
+- ESLint
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Fold Structure
+- src
+  - components: 放置 UI 元件與 邏輯運算 codes 的地方
+  - css: .css 統一放置區
+  - pages: 此專案共 4 頁，拆分為 4 個主要 page components 放置於此
+  - widgets: 放置 components 會重複使用到的 methods, vars
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Third Party Service
+- MOTC TDX api
+- Mapbox-gl api
