@@ -3,8 +3,59 @@ import Header from "../components/Header";
 import SearchRoute from "../components/SearchRoute";
 import { searchHolders, N1Cities, getEstimateTime } from "../widgets/widgets";
 import api from "../apis/api";
+import '../css/routes.css';
 
 const Routes = () => {
+    const fetchPositions = async (City, RouteID) => {
+        let positions = [[], []];
+
+        // A1: {City} should be in N1Cities array too.
+        if (N1Cities.indexOf(City) > -1) {
+            const query = `RealTimeByFrequency/Streaming/City/${City}?$filter=RouteID eq '${RouteID}'&$top=10&$format=JSON`;
+            const result = await api.get(query);
+
+            if (!result.data) { return positions; }
+
+            const s = result.data.map(data => ({PlateNumb: data.PlateNumb, 
+                                                Direction: data.Direction, 
+                                                BusPosition: { lon : data.BusPosition.PositionLon, lat : data.BusPosition.PositionLat } }) );
+            const d0 = s.filter(data => data.Direction === 0);
+            const d1 = s.filter(data => data.Direction === 1);
+
+            positions = [d0, d1];
+        }
+
+        return positions;
+    };
+
+    const fetchStationsForMap = async (City, RouteID) => {
+        let routes = [[], []];
+        
+        // A1: {City} should be in N1Cities array too.
+        if (N1Cities.indexOf(City) > -1) {
+            const query = `StopOfRoute/City/${City}?$filter=RouteID eq '${RouteID}'&$format=JSON`;
+            const response = await api.get(query);
+
+            if (!response.data) { return routes; }
+
+            const R0 = response.data.filter(route => route.Direction === 0 )[0];
+            const R1 = response.data.filter(route => route.Direction === 1 )[0];
+
+            let s0 = [], s1 = [];
+
+            if (R0) {
+                s0 = R0.Stops.map(stop => ({ StopName: stop.StopName.Zh_tw, 
+                                              StopPosition: {lon: stop.StopPosition.PositionLon, lat: stop.StopPosition.PositionLat} }) );
+            }
+            if (R1) { 
+                s1 = R1.Stops.map(stop => ({ StopName: stop.StopName.Zh_tw, 
+                                               StopPosition: {lon: stop.StopPosition.PositionLon, lat: stop.StopPosition.PositionLat} }) );
+            }
+            routes = [s0, s1];
+        }
+
+        return routes;
+    };
 
     const fetchResults = async (City, RouteID) => {
         let results = [[], []];
@@ -28,8 +79,17 @@ const Routes = () => {
 
             // subtract time error when transferring data.
             const getPreciseTime = function(arr) {
+                const EstimateTimeOfArrival = (item) => {
+                    if (!item.EstimateTime) { return '尚未發車'; }
+
+                    const time = getEstimateTime(item.EstimateTime, item.SrcTransTime);
+                    
+                    if (time <= 2) { return '即將到站'; }
+                    return `${time} mins`;
+                };
+
                 return arr.map(item => {    
-                    return ({ ...item, EstimateTime: getEstimateTime(item.EstimateTime, item.SrcTransTime) });
+                    return ({ ...item, EstimateTime: EstimateTimeOfArrival(item) });
                 });
             };
 
@@ -97,6 +157,8 @@ const Routes = () => {
                          handleCheckTermInBus={findTermInBuses}
                          handleSubmitToQuery={handleSubmitToQuery} 
                          handleFetchResult={fetchResults} 
+                         handleFetchMapPositions={fetchPositions}
+                         handleFetchRouteStops={fetchStationsForMap}
             />
         </>
     );

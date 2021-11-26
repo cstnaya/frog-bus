@@ -1,0 +1,8 @@
+section.stop {
+    background: var(--linearbg);
+    padding: var(--margin);
+}
+
+.result-list.stop-list li::before {
+    content: "\f1b9";
+}

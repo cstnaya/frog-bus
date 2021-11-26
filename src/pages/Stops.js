@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import api from "../apis/api";
 import SearchStop from "../components/SearchStop";
 import { searchHolders, Bearings, N1Cities } from "../widgets/widgets";
+import '../css/stop.css';
 
 const Stops = () => {
 
@@ -11,7 +12,11 @@ const Stops = () => {
         const responses = await api.get(query);
 
         const s = new Set(responses.data.map(item => 
-                            (JSON.stringify({ StationID: item.StationID, StationName: item.StationName.Zh_tw, Bearing: Bearings[item.Bearing] })) 
+                            (JSON.stringify({ StationID: item.StationID, 
+                                              StationName: item.StationName.Zh_tw, 
+                                              Bearing: Bearings[item.Bearing],
+                                              StationAddress: item.StationAddress
+                                             })) 
                         ));
         const fs = [...s].map(item => JSON.parse(item));
 
@@ -20,7 +25,11 @@ const Stops = () => {
 
     const handleOptionLists = (arr) => {
         return arr.map((bus, idx) => {
-            return <option value={`${bus.StationName} [往 ${bus.Bearing}]`}  data-routeid={bus.StationID} key={idx} />;  
+            if (bus.Bearing) {
+                return <option value={`${bus.StationName} [往 ${bus.Bearing}]`}  data-routeid={bus.StationID} key={idx} />;  
+            }  else {
+                return <option value={`${bus.StationName} [${bus.StationAddress}]`}  data-routeid={bus.StationID} key={idx} />;  
+            }
         });
     }
 
@@ -49,6 +58,8 @@ const Stops = () => {
             // get stops:
             const query = `Station/City/${City}?$filter=StationID eq '${StationID}'&$format=JSON`;
             const responses = await api.get(query);
+
+            if (!responses.data) { return { data: [] }; }
 
             const Stops = responses.data[0].Stops;
             const s = new Set(Stops.map(item => {
@@ -81,13 +92,15 @@ const Stops = () => {
     return (
         <>
             <Header />
-            <SearchStop Placeholder={{ "select" : searchHolders.select, "input" : searchHolders.stops }}
-                        handleFetchList={fetchStation}
-                        handleOptionLists={handleOptionLists}
-                        handleCheckTermInBus={findTermInStations}
-                        handleSubmitToQuery={handleSubmitToQuery}
-                        handleFetchResult={fetchResults}
-            />
+            <section className="stop">
+                <SearchStop Placeholder={{ "select" : searchHolders.select, "input" : searchHolders.stops }}
+                            handleFetchList={fetchStation}
+                            handleOptionLists={handleOptionLists}
+                            handleCheckTermInBus={findTermInStations}
+                            handleSubmitToQuery={handleSubmitToQuery}
+                            handleFetchResult={fetchResults}
+                />
+            </section>
         </>
     );
 };

@@ -15,6 +15,14 @@
     z-index: 500;
 }
 
+.busMarker {
+    background-image: url('/src/imgs/bus.svg');
+    background-size: cover;
+    width: 45px;
+    height: 35px;
+    cursor: pointer;
+}
+
 .mapboxgl-popup {
     max-width: 200px;
     border-radius: 55px;

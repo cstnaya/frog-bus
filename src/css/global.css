@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500&display=swap');
+:root {
+    --margin: 4.5vh;
+    --linearbg: linear-gradient(to bottom, #D0E6A5, #E1E3A3);
+}
+
+body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    min-height: 100vh;
+    background-color: #F9FCF4;
+    color: #1B3F25;
+}
+
+main {
+    padding: 0 5vw;
+}
+
+.result-list {
+    padding: 0;
+    margin: 0;
+}
+.result-list li::before {
+    font-family: 'FontAwesome';
+    display: inline-block;
+    font-weight: 900;
+    margin-right: .7em;
+    content: '';
+}
+.result-list li {
+    list-style: none;
+    color: #1B3F25;
+    margin: 1em 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .3em;
+}
+.result-list li > span:nth-child(1) {
+    flex: 1;
+}

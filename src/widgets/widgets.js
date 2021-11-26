@@ -5,7 +5,6 @@ const cities = {
     "臺中市":"Taichung",
     "臺南市":"Tainan",
     "高雄市":"Kaohsiung",
-    "基隆市":"Keelung",
     "新竹市":"Hsinchu",
     "新竹縣":"HsinchuCounty",
     "苗栗縣":"MiaoliCounty",
@@ -20,7 +19,6 @@ const cities = {
     "臺東縣":"TaitungCounty",
     "金門縣":"KinmenCounty",
     "澎湖縣":"PenghuCounty",
-    "連江縣":"LienchiangCounty"
 };
 
 const N1Cities = [
@@ -68,8 +66,9 @@ const getEstimateTime = (est, trans) => {
     const now = new Date();
     const newTrans = Date.parse(trans);
     const diff = (now - newTrans) / 1000 ;
-    console.log(diff, est);
     return Math.round( (est - diff) / 60 );
 }
 
-export { cities, debounce, searchHolders, N1Cities, Bearings, getEstimateTime };
+const REFRESH_TIME = 30 * 1000;
+
+export { cities, debounce, searchHolders, N1Cities, Bearings, getEstimateTime, REFRESH_TIME };

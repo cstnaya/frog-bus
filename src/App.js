@@ -5,6 +5,8 @@ import Routes from "./pages/Routes";
 import Stops from "./pages/Stops";
 import NearBy from "./pages/NearBy";
 import 'font-awesome/css/font-awesome.min.css';
+import './css/geomapbox.css';
+import './css/global.css';
 
 const App = () => {
     return (

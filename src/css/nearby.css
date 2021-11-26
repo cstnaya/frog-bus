@@ -1,0 +1,30 @@
+section.nearby {
+    background: var(--linearbg);
+    padding: 0 0 8vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    color: #1B3F25;
+}
+
+.nearby .btn-getlocation {
+    appearance: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #42BC87;
+    padding: 10px 100px;
+    border-radius: 4px;
+    font-size: 2.5em;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 0 var(--margin);
+}
+
+.nearby > section {
+    padding: 0 var(--margin);
+}
+
+.result-list.nearby-list li:before {
+    content: "\f041";
+}

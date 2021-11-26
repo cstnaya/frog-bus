@@ -1,0 +1,45 @@
+#form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+#form > * {
+    box-sizing: border-box;
+    flex: 1;
+    outline: none;
+
+    background-color: #F9FCF4;
+    padding: 1.5em;
+    color: #1B3F25;
+    font-size: 1em;
+
+    border: 1px solid #f1f1f1;
+    border-radius: 3px;
+}
+
+#form > button {
+    background-color: #42BC87;
+    color: #fff;
+    font-size: 2em;
+    padding: .4em;
+    border: none;
+}
+
+@media only screen and (min-width: 720px) {
+    #form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #form > * {
+        padding: .4em;
+    }
+    #form button {
+        max-width: 130px;
+    }
+    #form select {
+        max-width: 200px;
+    }
+}

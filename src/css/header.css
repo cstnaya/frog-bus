@@ -1,0 +1,54 @@
+:root {
+    --bdr-rds: 4px;
+}
+
+header nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 0;
+    margin: 0;
+}
+header nav li {
+    list-style: none;
+    background-color: #D6E4D7;
+    border-radius: var(--bdr-rds) var(--bdr-rds) 0 0;
+}
+header nav li.active {
+    background-color: #D0E6A5;
+} 
+header nav a {
+    color: #3E6E41;
+    text-decoration: none;
+    padding: 10px 7px;
+    display: inline-block;
+}
+header .h1-logo {
+    background-color: #D0E6A5;
+    margin: 0;
+    padding: 6vh 0;
+    border-radius: 0 var(--bdr-rds) 0 0;
+    font-size: 1.5em;
+    letter-spacing: .1em;
+}
+header .h1-logo a {
+    text-decoration: none;
+    color: #1B3F25;
+    font-weight: 500;
+    
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+@media only screen and (min-width: 720px) {
+    header nav ul {
+        gap: 10px;
+    }
+    header nav a {    
+        padding: 20px 15px;
+    }
+    header .h1-logo {
+        font-size: 2em;
+    }
+}

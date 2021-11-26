@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header";
 import api from "../apis/api";
 import mapboxgl from "mapbox-gl";
-import '../css/geomapbox.css';
-import {  Bearings } from "../widgets/widgets";
+import { Bearings } from "../widgets/widgets";
 import SearchNoResult from "../components/SearchNoResult";
+import '../css/nearby.css';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -34,7 +34,7 @@ const NearBy = () => {
     const [results, setResults] = useState([]);
     const [inited, setInited] = useState(false);
 
-    const getLocation = () => {
+    const getLocation = (e) => {
         const storePosition = async (position) => {
             const { latitude, longitude } = await position.coords;
             setLocation({ lat: latitude, lon: longitude });
@@ -42,7 +42,9 @@ const NearBy = () => {
 
         const errHandle = (err) => {
             console.log('error!');
-        }; 
+        };
+
+        e.target.style.display = 'none';
 
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(storePosition, errHandle);
@@ -143,17 +145,32 @@ const NearBy = () => {
     return (
         <>
             <Header />
-            <button onClick={getLocation}>Click me!</button>
-            { location.lon !== null &&
-                <section>
-                    <div ref={mapContainer} style={{ height : '350px' }}></div>
-                    <ul>
-                        { results.map((stop, idx) => <li key={idx}>{stop.StationName} {stop.Bearing} 距離 {stop.Distance} 公尺</li>) }
-                    </ul>
-                    <small>距離僅供估算，非實際距離。</small>
-                </section>
-            }
-            { (location.lon !== null && results.length === 0) ? <SearchNoResult /> : null }
+            <section className="nearby">
+                <button className='btn-getlocation' onClick={e => getLocation(e)} title="點我獲取座標">
+                    <i className="fa fa-map-marker" aria-hidden="true"></i>
+                </button>
+
+                { location.lon !== null &&
+                    <>
+                        <div ref={mapContainer} style={{ height : '350px' }}></div>
+                        
+                        <section>
+                            <ul className='result-list nearby-list'>
+                                { results.map((stop, idx) => 
+                                    <li key={idx}>
+                                        <span>{stop.StationName} [{stop.Bearing}] </span> 
+                                        <span>距離 {stop.Distance} 公尺 </span>
+                                    </li>) 
+                                }
+                            </ul>
+
+                            <small>距離僅供估算，非實際距離。</small>
+                        </section>
+                    </>
+                }
+
+                { (location.lon !== null && results.length === 0) ? <SearchNoResult /> : null }
+            </section>
         </>
     );
 };

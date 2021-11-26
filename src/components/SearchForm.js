@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { cities, debounce } from "../widgets/widgets";
+import '../css/form.css';
 
 const SearchForm = ({ Placeholder, handleFetchList, handleOptionLists, handleSubmitToQuery, handleCheckTermInBus }) => {
     const cities_options = Object.keys(cities).map((city) => 
