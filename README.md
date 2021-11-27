@@ -1,5 +1,5 @@
 # Week3 - 全台公車動態時刻查詢應用服務 - 蛙蛙公車
-===
+
 ###### tags: `React` `React-router-dom` `axios` `mapbox-gl` `jsSHA` `ESLint` `MOTC-TDX`
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -14,6 +14,7 @@ The F2E 第三周作品專案，公車即時動態搜尋 App。
 運行方式：
 - `npm install`
 - `npm start`
+- 請確認運行在 `localhost:3000/*` 或 `localhost:3001/*` 上
 
 ### Tools
 此專案使用到的工具:
