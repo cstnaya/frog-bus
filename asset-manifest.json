@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/frog-bus/static/css/main.53de942c.chunk.css",
+    "main.css": "/frog-bus/static/css/main.19c841da.chunk.css",
     "main.js": "/frog-bus/static/js/main.4f218f67.chunk.js",
     "main.js.map": "/frog-bus/static/js/main.4f218f67.chunk.js.map",
     "runtime-main.js": "/frog-bus/static/js/runtime-main.228198ba.js",
     "runtime-main.js.map": "/frog-bus/static/js/runtime-main.228198ba.js.map",
-    "static/css/2.edaedc1f.chunk.css": "/frog-bus/static/css/2.edaedc1f.chunk.css",
+    "static/css/2.e39e9764.chunk.css": "/frog-bus/static/css/2.e39e9764.chunk.css",
     "static/js/2.0f1675b6.chunk.js": "/frog-bus/static/js/2.0f1675b6.chunk.js",
     "static/js/2.0f1675b6.chunk.js.map": "/frog-bus/static/js/2.0f1675b6.chunk.js.map",
     "index.html": "/frog-bus/index.html",
-    "static/css/2.edaedc1f.chunk.css.map": "/frog-bus/static/css/2.edaedc1f.chunk.css.map",
-    "static/css/main.53de942c.chunk.css.map": "/frog-bus/static/css/main.53de942c.chunk.css.map",
+    "static/css/2.e39e9764.chunk.css.map": "/frog-bus/static/css/2.e39e9764.chunk.css.map",
+    "static/css/main.19c841da.chunk.css.map": "/frog-bus/static/css/main.19c841da.chunk.css.map",
     "static/js/2.0f1675b6.chunk.js.LICENSE.txt": "/frog-bus/static/js/2.0f1675b6.chunk.js.LICENSE.txt",
     "static/media/geomapbox.css": "/frog-bus/static/media/nowPos.df23ec34.svg",
     "static/media/font-awesome.min.css": "/frog-bus/static/media/fontawesome-webfont.f691f37e.woff",
@@ -20,9 +20,9 @@
   },
   "entrypoints": [
     "static/js/runtime-main.228198ba.js",
-    "static/css/2.edaedc1f.chunk.css",
+    "static/css/2.e39e9764.chunk.css",
     "static/js/2.0f1675b6.chunk.js",
-    "static/css/main.53de942c.chunk.css",
+    "static/css/main.19c841da.chunk.css",
     "static/js/main.4f218f67.chunk.js"
   ]
 }
