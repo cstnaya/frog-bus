@@ -38,3 +38,7 @@ main {
 .result-list li > span:nth-child(1) {
     flex: 1;
 }
+
+.result-container {
+    padding: 5vh 0;
+}

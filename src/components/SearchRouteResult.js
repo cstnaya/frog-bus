@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import SearchNoResult from "./SearchNoResult";
 import mapboxgl from "mapbox-gl";
 
@@ -122,8 +122,8 @@ const SearchRouteResult = ({ results, destination, positions, routes }) => {
     }
 
     return (
-        <section>
-            <section>
+        <>
+            <section className='result-container'>
                 <div className='btns-list'>
                     { results[0].length > 0 &&  <button onClick={e => handleButtonOnClick(0)} className='btn-direction btn-dir-0 btn-dir-active'>
                                                     往 {destination[0]}
@@ -145,11 +145,14 @@ const SearchRouteResult = ({ results, destination, positions, routes }) => {
                     }
                 </ol>
                 { results[0].length > 0 && results[1].length > 0 ?
-                        <div ref={mapContainer} style={{ height : '350px' }} className="mapContainer"></div> : null
+                    <div ref={mapContainer} style={{ height : '350px' }} className="mapContainer"></div> : null
                 }
             </section>
-            { query && results[0].length === 0 && results[1].length === 0 ? <SearchNoResult /> : null }
-        </section>
+            { query && results[0].length === 0 && results[1].length === 0 ? 
+                <section style={{ padding: '0 5vh' }} ><SearchNoResult /></section>
+                : null 
+            }
+        </>
     );
 };
 

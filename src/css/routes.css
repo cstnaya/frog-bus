@@ -8,6 +8,7 @@ section.routes {
     justify-content: center;
     flex-wrap: wrap;
     gap: 1em;
+    padding: 0 var(--margin);
 }
 
 .btn-direction {
